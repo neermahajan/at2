@@ -62,7 +62,7 @@ public class FindTotalMass {
 		JsonObject object = null;
 		String unit, elementName = "";
 		
-		BigDecimal totalmass= new BigDecimal("0.00");
+		BigDecimal totalmass= new BigDecimal("0.00"); // NM: Use BigDecimal.ZERO
 		
 		try {
 			reader = Json.createReader(new FileReader(inputFile));
@@ -70,7 +70,7 @@ public class FindTotalMass {
 			
 			// iterate through the array of elements to calculate the mass and add it to the total mass
 			JsonArray nodes = elementObject.getJsonArray("components");
-	        for (JsonValue jsonValue : nodes) {
+	        for (JsonValue jsonValue : nodes) { // NM: Whole file needs Formatting 
 	        	object = (JsonObject) jsonValue;
 	        	unit = object.getString("units");
 	        	elementName = object.getString("name").toLowerCase();
@@ -89,7 +89,7 @@ public class FindTotalMass {
 		        			// order of magnitude is converted into grams equivalent
 		        			totalmass = totalmass.add(new BigDecimal(num.toString()).multiply(unitConversion.get(unit.toLowerCase())));
 		        		}
-	        		}else{
+	        		}else{  // NN: use System.err
 	        			System.out.println("Element {" + elementName + "} cannot not be found in element table \n. Hence this entry will not be used in total mass calculation.");
 	        		}
 	        	}else{
